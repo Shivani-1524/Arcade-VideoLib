@@ -1,0 +1,9 @@
+.products-layout {
+    margin-top: 4.9rem;
+    display: grid;
+    grid-template-columns: 19.2rem 1fr;
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+  }
+  
