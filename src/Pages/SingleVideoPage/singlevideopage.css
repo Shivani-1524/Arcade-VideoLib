@@ -19,10 +19,13 @@
 }
 .video-actions{
     padding-right: 1.5rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     display: flex;
     gap: 20px;
     cursor: pointer;
+}
+.video-actions i:hover{
+    color: var(--violet-color);
 }
 .video-header{
     display: flex;
