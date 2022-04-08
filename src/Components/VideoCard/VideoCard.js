@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
 import Dummy from '../../Assets/dummy.jpg'
 import './videocard.css'
@@ -11,7 +12,10 @@ const VideoCard = ({ props }) => {
     return (
         <div className="card ver-card no-bg-color">
             <div className="img-container pos-rel">
-                <img className="img-resp" src={thumbnail} alt="card" />
+                <Link to={`/video/${_id}`}>
+                    <img className="img-resp" src={thumbnail} alt="card" />
+                </Link>
+
                 <button onClick={() => setToggleLike(prev => !prev)} className="btn icon-btn pos-abs top-right star-toggle-btn">
                     {toggleLike ? <i className="fas fa-star filled"></i> : <i className="fas fa-star"></i>}
                 </button>
