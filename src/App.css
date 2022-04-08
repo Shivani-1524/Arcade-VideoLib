@@ -11,9 +11,15 @@
   font-family: "Inter", sans-serif;
 }
 
-/* body{
-  background-color: var(--dark-bg);
-} */
+
+.logout-icon::before {
+  content: "\f2f5";
+}
+.fa-circle-user::before {
+  content: "\f2bd";
+}
+
+
 
 img {
   width: 100%;
