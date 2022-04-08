@@ -13,6 +13,7 @@ export const videos = [
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
     videoUrl: "https://www.youtube.com/watch?v=bPGLPCXDaFI",
     channelName: "eggWick",
+    channelImg: "https://yt3.ggpht.com/Qvy3LrbqlBve3OrtJHHCK9cXyBgTA5weV-vJ04Cy_gY9nLHISmM0gDGBhhGU1AmPFilKa33WeA=s48-c-k-c0x00ffffff-no-rj",
     category: "New Updates",
     thumbnail: "https://img.youtube.com/vi/bPGLPCXDaFI/maxresdefault.jpg"
 

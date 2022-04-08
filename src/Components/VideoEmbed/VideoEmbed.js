@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { fetchVideoDetails } from '../../Utils/get-singlevideo'
+import ReactPlayer from 'react-player'
+import './videoembed.css'
 
-const VideoEmbed = ({ videoId }) => {
-  const [videoDetails, setVideoDetails] = useState(null);
-  useEffect(() => {
-    (async () => {
-      const { data, errorData, msg } = await fetchVideoDetails(videoId)
-      console.log(data)
-      !errorData[0] ? setVideoDetails(data) : console.log(errorData[1])
-    })()
-  }, []);
+const VideoEmbed = ({ videoUrl }) => {
   return (
-    <div className="video-responsive">
-      <iframe
-        width="853"
-        height="480"
-        // src={`https://www.youtube.com/embed/${videoDetails.videoUrl}`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded youtube"
-      />
+    <div className='center-items resp-video'>
+      <ReactPlayer url={videoUrl} width="100%"
+        height="100%" controls={false} />
     </div>
   )
 }
