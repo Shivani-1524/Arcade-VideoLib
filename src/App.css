@@ -1,14 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Inter&display=swap');
 @import url("https://nifty-tesla-85dda2.netlify.app/Components/components.css");
 
 :root {
   --blue-gradient: #40c9ff;
   --violet-gradient: #e81cff;
+  --dark-bg: #1A1C1E;
   font-size: 13px;
 }
 * {
   font-family: "Inter", sans-serif;
 }
+
+/* body{
+  background-color: var(--dark-bg);
+} */
 
 img {
   width: 100%;

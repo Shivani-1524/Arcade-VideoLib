@@ -1,19 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { createRoot } from 'react-dom/client';
+import { CategoryProvider } from "./Context/category-provider"
+const container = document.getElementById('root');
+const root = createRoot(container)
 
 // Call make Server
 makeServer();
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <CategoryProvider>
+        <App />
+      </CategoryProvider>
     </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

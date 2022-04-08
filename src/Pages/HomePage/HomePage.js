@@ -1,18 +1,35 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import { Sidenav } from "../../Components/Sidenav/Sidenav"
-import "./homepage.css"
-import { Navbar } from '../../Components/Navbar/Navbar'
+import React, { useEffect, useState } from 'react'
+import { VideoCard } from '../../Components/VideoCard/VideoCard'
+import { CategoryChip } from './HomeComponent/CategoryChip'
+import { fetchVideos } from '../../Utils/fetch-videolist'
+import './homepage.css'
+
+
 const HomePage = () => {
+    const [videoList, setvideoList] = useState([]);
+    useEffect(() => {
+        (async () => {
+            const { data, errorData } = await fetchVideos();
+            !errorData[0] ? setvideoList(data) : console.log(errorData[1])
+        })()
+    }, []);
+
+    const categoryList = [
+        { title: 'All', lableFor: 'all' }, { title: 'New Updates', lableFor: 'updates' }, { title: 'Montages', lableFor: 'montages' }, { title: 'Funny Clips', lableFor: 'funny' }, { title: 'Tournamnets', lableFor: 'tournaments' },]
+
     return (
-        <div className="products-layout">
-            <Navbar />
-            <Sidenav />
-            <Link to="/test1">test1</Link>
-            <Link to="/test2">test2</Link>
-            <Link to="/test3">test3</Link>
-            <Outlet />
+        <div className="explore-container">
+            <div className="hero-section center-items">
+                <h1 className='center-txt'>THE <span className='violet-txt'>VIDEO GAMING </span> ARCHIVE</h1>
+            </div>
+            <div className="categories-container">
+                {categoryList.map((category, index) => <CategoryChip key={index} props={category} />)}
+            </div>
+            <div className='explore-video-layout'>
+                {videoList.map(video => <VideoCard key={video._id} props={video} />)}
+            </div>
         </div>
+
     )
 }
 

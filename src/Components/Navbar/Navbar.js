@@ -8,10 +8,6 @@ const Navbar = () => {
             <div className="nav-logo">
                 <img src={NavLogo} alt="logo" />
             </div>
-            <div className="nav-items">
-                <Link to="/" className="nav-link sm-title hide-md">About Us</Link>
-                <Link to="/shop" className="nav-link sm-title hide-md">Shop</Link>
-            </div>
             <div className="nav-space"></div>
             <div className="nav-icon-items">
                 <div className="nav-search-bar hide-sm">
