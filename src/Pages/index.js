@@ -1,3 +1,3 @@
 import { TemplatePage } from "./TemplatePage/TemplatePage"
-import { HomePage } from "./HomePage/Homepage"
+import { HomePage } from "./HomePage/HomePage.js"
 export { TemplatePage, HomePage }
