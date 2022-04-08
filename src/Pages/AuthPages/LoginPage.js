@@ -22,7 +22,7 @@ const LoginPage = () => {
         localStorage.setItem("userToken", data)
         console.log(location?.state?.from?.pathname)
         console.log(location.state)
-        location.state.from ? navigate(location?.state?.from?.pathname) : navigate('/')
+        location.state ? navigate(location?.state?.from?.pathname) : navigate('/')
       }
       else {
         setLoginError(msg)
