@@ -72,7 +72,8 @@ const clearHistory = async () => {
 
 const sendUserHistory = async (clickedVideo) => {
     const { data } = await fetchUserHistory()
-    const foundInHistory = data.history.some(video => video._id === clickedVideo._id)
+    const historyList = data.history
+    const foundInHistory = historyList.some(video => video._id === clickedVideo._id)
     if (foundInHistory === false) {
         try {
             const res = await axios({
