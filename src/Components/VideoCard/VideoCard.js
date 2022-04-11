@@ -21,7 +21,7 @@ const VideoCard = ({ props, type }) => {
         if (type === "history") {
             return (
                 <button onClick={() => handleHistoryDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
-                    <i class="close-icon fas fa-times-circle delete-icon"></i>
+                    <i className="close-icon fas fa-times-circle delete-icon"></i>
                 </button>
             )
         }
