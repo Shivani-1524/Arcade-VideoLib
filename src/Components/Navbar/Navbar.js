@@ -16,13 +16,9 @@ const Navbar = () => {
             </div>
             <div className="nav-space"></div>
             <div className="nav-icon-items">
-                <div className="nav-search-bar hide-sm">
-                    <input className="search-bar" type="text" placeholder="Search.." />
-                    <i className="fa fa-brands fa-searchengin"></i>
-                </div>
                 {isLoggedIn ? <Link to='/profile'>
                     <button id="dark-bg-icon" className="btn icon-btn hide-md">
-                        <i class="fa fas fa-solid fa-circle-user"></i>
+                        <i className="fa fas fa-solid fa-circle-user"></i>
                     </button>
                 </Link> : <Link to='/login'>
                     <button id="dark-bg-icon" className="btn icon-btn hide-md">
@@ -34,16 +30,6 @@ const Navbar = () => {
                         <i className="fa fas fa-solid fa-arrow-right-from-bracket logout-icon"></i>
                     </button>
                 </Link>}
-                <Link to='/wishlist'>
-                    <button id="dark-bg-icon" className="btn icon-btn pos-rel hide-md">
-                        <i className="fa fa-solid fa-heart"></i>
-                    </button>
-                </Link>
-                <Link to='/cart'>
-                    <button id="dark-bg-icon" className="btn icon-btn pos-rel hide-md">
-                        <i className="fas fa-shopping-cart"></i>
-                    </button>
-                </Link>
                 <button id="dark-bg-icon" className="btn icon-btn show-md">
                     <i className="fas fa-solid fa-bars"></i>
                 </button>

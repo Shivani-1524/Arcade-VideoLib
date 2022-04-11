@@ -20,7 +20,12 @@
 .fa-ellipsis-vertical:before {
     content: "\f142";
   }
-
+  .fa-circle-minus:before{
+    content: "\f056";
+  }
+  .delete-icon.fa-times-circle{
+    color: var(--orange-color);
+  }
 
   .star-toggle-btn i {
     color: var(--white);

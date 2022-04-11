@@ -11,13 +11,13 @@ const Sidenav = () => {
                 <i className="fa fa-solid fa-compass"></i>
                 Explore
             </NavLink>
-            <NavLink to="/fes" className={({ isActive }) => activeStyle(isActive)}>
+            <NavLink to="/videos/liked" className={({ isActive }) => activeStyle(isActive)}>
                 <i className="fa fa-solid fa-thumbs-up"></i>
                 Liked Videos</NavLink>
-            <NavLink to="/dd" className={({ isActive }) => activeStyle(isActive)}>
+            <NavLink to="/videos/later" className={({ isActive }) => activeStyle(isActive)}>
                 <i className="fa fa-solid fa-clock"></i>
                 Watch Later</NavLink>
-            <NavLink to="/ff" className={({ isActive }) => activeStyle(isActive)}>
+            <NavLink to="/videos/history" className={({ isActive }) => activeStyle(isActive)}>
                 <i className="fa fa-solid fa-hourglass"></i>
                 History</NavLink>
             <NavLink to="/da" className={({ isActive }) => activeStyle(isActive)}>

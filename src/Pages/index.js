@@ -5,4 +5,5 @@ import { LoginPage } from "./AuthPages/LoginPage"
 import { SignupPage } from "./AuthPages/SignupPage"
 import { LogoutPage } from "./AuthPages/LogoutPage"
 import { LikedVideoPage } from "./LikedVideoPage/LikedVideoPage"
-export { LoginPage, TemplatePage, HomePage, SingleVideoPage, SignupPage, LogoutPage, LikedVideoPage }
+import { HistoryPage } from "./HistoryPage/HistoryPage"
+export { LoginPage, TemplatePage, HomePage, SingleVideoPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage }

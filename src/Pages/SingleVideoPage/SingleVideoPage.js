@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './singlevideopage.css'
 import { VideoEmbed } from '../../Components/VideoEmbed/VideoEmbed'
 import { fetchVideoDetails } from '../../Utils/get-singlevideo'
+import { fetchUserHistory, sendUserHistory } from '../../Utils/history-utils'
 
 const SingleVideoPage = () => {
     const { videoId } = useParams()
     const [videoDetails, setVideoDetails] = useState(false);
     const { videoUrl, channelName, channelImg, title, description } = videoDetails && videoDetails?.video
+    const navigate = useNavigate()
     useEffect(() => {
-        (async () => {
-            const { data, errorData, msg } = await fetchVideoDetails(videoId)
-            !errorData[0] ? setVideoDetails(data) : console.log(errorData[1])
-        })()
-    }, []);
+        videoId ?
+            (async () => {
+                const { data, errorData } = await fetchVideoDetails(videoId)
+                if (!errorData[0]) {
+                    await sendUserHistory(data.video)
+                    setVideoDetails(data)
+                } else {
+                    console.log(errorData[1])
+                }
+            })() : navigate('/')
+    }, [navigate, videoId]);
 
     return (
         videoDetails &&
