@@ -50,7 +50,7 @@ const VideoCard = ({ props, type }) => {
                     <i className="fas fa fa-solid fa-ellipsis-vertical"></i>
                 </div>
 
-                {!isDrawerHidden && <VideoDrawer />}
+                {!isDrawerHidden && <VideoDrawer video={props} />}
             </div>
         </div>
     )

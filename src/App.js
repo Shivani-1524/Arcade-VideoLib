@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { RequiresAuth } from "./RequiresAuth"
 import Mockman from "mockman-js"
-import { TemplatePage, HomePage, SingleVideoPage, LoginPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage } from "./Pages/index"
+import { TemplatePage, HomePage, SingleVideoPage, LoginPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage, PlaylistPage } from "./Pages/index"
 function App() {
   return (
     <div className="App">
@@ -16,6 +16,7 @@ function App() {
           <Route path="/videos" element={<RequiresAuth />}>
             <Route path="/videos/liked" element={<LikedVideoPage />} />
             <Route path="/videos/history" element={<HistoryPage />} />
+            <Route path="/videos/playlists" element={<PlaylistPage />} />
           </Route>
         </Route>
         <Route path="/mock" element={<Mockman />} />

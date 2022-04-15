@@ -4,13 +4,15 @@ import { CategoryChip } from './HomeComponent/CategoryChip'
 import { fetchVideos } from '../../Utils/fetch-videolist'
 import './homepage.css'
 import { useCategory } from '../../Context/category-provider'
+import {PlaylistModal} from '../../Components/PlaylistModal/PlaylistModal'
+import { usePlaylist } from '../../Context/playlist-provider'
 
 
 const HomePage = () => {
     const [videoList, setvideoList] = useState([]);
     const [whiteBg, setWhiteBg] = useState(false)
     const { videoCategory } = useCategory()
-
+    const {togglePlaylistModal} = usePlaylist()
     useEffect(() => {
         (async () => {
             const { data, errorData } = await fetchVideos();
@@ -32,6 +34,7 @@ const HomePage = () => {
                     <i className="fa fa-brands fa-searchengin"></i>
                 </div>
             </div>
+            {togglePlaylistModal && <PlaylistModal/>}
             <div className="categories-container">
                 {categoryList.map((category, index) => <CategoryChip key={index} props={category} />)}
             </div>
