@@ -29,10 +29,10 @@ const fetchUserPlaylists = async () => {
 }
 
 //ADDS NEW PLYLIST
-const createPlaylist = async (playlistTitle) => {
+const createPlaylist = async (playlistTitle, playlistDesc) => {
     try {
         const res = await axios.post("/api/user/playlists",
-        { playlist: { title: playlistTitle } })
+        { playlist: { title: playlistTitle, description: playlistDesc } })
         if (res.status === 200) {
             return {
                 data: res.data,
@@ -105,9 +105,7 @@ const addVideoToPlaylist  = async (playlistId, video) => {
 
 const removeVideoFromPlaylist = async (playlistId, videoId) => {
     try {
-        const res = await axios.post(`/api/user/playlists/${playlistId}/${videoId}`, {
-            video
-        })
+        const res = await axios.delete(`/api/user/playlists/${playlistId}/${videoId}`)
         if (res.status === 200) {
             return {
                 data: res.data,
