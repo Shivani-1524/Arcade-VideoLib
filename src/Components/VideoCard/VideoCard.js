@@ -49,8 +49,7 @@ const VideoCard = ({ props, type }) => {
                 <div onClick={() => setIsDrawerHidden(prev => !prev)} className='bg-kebab'>
                     <i className="fas fa fa-solid fa-ellipsis-vertical"></i>
                 </div>
-
-                {!isDrawerHidden && <VideoDrawer video={props} />}
+                {!isDrawerHidden && <VideoDrawer video={props} onSelect={()=>setIsDrawerHidden(true)}/>}
             </div>
         </div>
     )

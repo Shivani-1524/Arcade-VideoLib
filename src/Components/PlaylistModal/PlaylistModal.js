@@ -1,17 +1,32 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { usePlaylist } from '../../Context/playlist-provider'
 import './playlistmodal.css'
+import { addVideoToPlaylist, createPlaylist, fetchUserPlaylists } from '../../Utils/playlist-utils'
 
 const PlaylistModal = () => {
+  useEffect(()=>{
+    (async()=>{
+       await fetchUserPlaylists()
+    })()
+  },[])
     const test = [1,2,3,4,9]
-    const {togglePlaylistModal, setTogglePlaylistModal } = usePlaylist()
+    const {setTogglePlaylistModal } = usePlaylist()
   return (
-    <div className='playlist-modal'>
-      <button onClick={()=>setTogglePlaylistModal(false)}>CLOSE</button>
-        <p>Playlists</p>
-        <div>Create New PLaylist</div>
-        {test.map(item => <div>{item}</div>)}
-    </div>
+    <div className='modal-bg center-items'>
+     <div className='playlist-modal'>
+       <button onClick={()=>setTogglePlaylistModal(false)}>CLOSE</button>
+         <p className='sm-p '>Create New PLaylist</p>
+         
+
+         {test.map(item => 
+         <div className='playlist-items'>
+          <input htmlFor={item} type="checkbox"/>
+         <label id={item}>{item}</label>
+         </div>)}
+     </div>
+     </div>
+     
   )
 }
 

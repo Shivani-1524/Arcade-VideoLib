@@ -25,6 +25,7 @@ const HomePage = () => {
 
     return (
         <div>
+            {togglePlaylistModal && <PlaylistModal/>}
             <div className="hero-section center-items">
                 <h1 className='center-txt'>THE <span className='violet-txt'>VIDEO GAMING </span> ARCHIVE</h1>
             </div>
@@ -34,7 +35,7 @@ const HomePage = () => {
                     <i className="fa fa-brands fa-searchengin"></i>
                 </div>
             </div>
-            {togglePlaylistModal && <PlaylistModal/>}
+            
             <div className="categories-container">
                 {categoryList.map((category, index) => <CategoryChip key={index} props={category} />)}
             </div>
@@ -49,7 +50,6 @@ const HomePage = () => {
                 })}
             </div>
         </div>
-
     )
 }
 
