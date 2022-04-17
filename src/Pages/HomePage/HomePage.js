@@ -10,7 +10,6 @@ const HomePage = () => {
     const [videoList, setvideoList] = useState([]);
     const [whiteBg, setWhiteBg] = useState(false)
     const [searchVal, setSearchVal] = useState('')
-    const [isLikedVideo, setIsLikedVideo] = useState(false)
     const { videoCategory } = useCategory()
 
     useEffect(() => {

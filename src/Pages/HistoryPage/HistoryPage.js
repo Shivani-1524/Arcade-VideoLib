@@ -18,7 +18,7 @@ const HistoryPage = () => {
             const { data, errorData } = await fetchUserHistory()
             !errorData[0] ? historyDispatch({ type: "UPDATE_HISTORY", payload: data.history }) : console.log(errorData[1])
         })()
-    }, []);
+    }, [historyDispatch]);
 
 
     return (

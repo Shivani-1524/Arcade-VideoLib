@@ -12,7 +12,7 @@ const LikedVideoPage = () => {
             const { data, errorData } = await fetchLikedVideos()
             !errorData[0] ? likedVideoDispatch({ payload: data.likes, type: 'UPDATE_LIKEDLIST' }) : console.error(errorData[1])
         })()
-    }, []);
+    }, [likedVideoDispatch]);
     return (
         <div>
             {

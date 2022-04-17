@@ -12,7 +12,8 @@ const WatchLaterPage = () => {
             const { data, errorData } = await fetchWatchlaterVideos()
             !errorData[0] ? watchlaterDispatch({ payload: data.likes, type: 'UPDATE_WATCHLATER' }) : console.error(errorData[1])
         })()
-    }, []);
+    }, [watchlaterDispatch]);
+
     return (
         <div>
             {
