@@ -6,16 +6,18 @@ import { removeVideoFromPlaylist, findElementInData, deleteHistoryVideo, addLike
 import { useHistory, useAuth, useLikedVideo, useWatchlater, usePlaylist } from '../../Context/index'
 
 
-const VideoCard = ({ props, type }) => {
+const VideoCard = ({ props, type, playlistId }) => {
 
     const { _id, title, channelName, thumbnail } = props
     const [isDrawerHidden, setIsDrawerHidden] = useState(true);
     const { historyDispatch } = useHistory()
-    const [toggleLike, setToggleLike] = useState(false);
     const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
     const { playlistDispatch } = usePlaylist()
+    const watchlaterDispatch = useWatchlater()
+    const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
+    const [toggleLike, setToggleLike] = useState(isLikedVideo);
 
 
     const handleHistoryDelete = async (videoId) => {
@@ -30,7 +32,7 @@ const VideoCard = ({ props, type }) => {
         const { data, errorData } = await deleteFromWatchlater(videoId)
         !errorData[0] ? watchlaterDispatch({ type: 'UPDATE_WATCHLATER', payload: data?.watchlater }) : console.error(errorData[1])
     }
-    const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
+
 
     const handlePlaylistVideoDelete = async (playlistId, videoId) => {
         const { data, errorData } = await removeVideoFromPlaylist(playlistId, videoId)
@@ -67,7 +69,7 @@ const VideoCard = ({ props, type }) => {
                 return (<button onClick={async () => {
                     if (isLoggedIn) {
                         setToggleLike(prev => !prev)
-                        const { data, errorData } = !toggleLike ? await addLikedVideo(props) : await removeLikedVideo(props._id)
+                        const { data, errorData } = !toggleLike || !isLikedVideo ? await addLikedVideo(props) : await removeLikedVideo(props._id)
                         !errorData[0] ? likedVideoDispatch({ type: 'UPDATE_LIKEDLIST', payload: data.likes }) : console.error(errorData[1])
                     } else {
                         navigate('/login')
