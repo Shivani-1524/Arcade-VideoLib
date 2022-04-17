@@ -82,7 +82,6 @@ const sendUserHistory = async (clickedVideo) => {
                     video: clickedVideo
                 }
             })
-            console.log("RESPONSE", res)
             if (res.status === 201 || 200) {
                 return {
                     data: res.data,

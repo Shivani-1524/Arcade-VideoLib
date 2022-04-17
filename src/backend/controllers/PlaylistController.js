@@ -86,7 +86,6 @@ export const removePlaylistHandler = function (schema, request) {
  * */
 
 export const getVideosFromPlaylistHandler = function (schema, request) {
-  console.log('CHECK')
   const user = requiresAuth.call(this, request);
   if (user) {
     const playlistId = request.params.playlistId;

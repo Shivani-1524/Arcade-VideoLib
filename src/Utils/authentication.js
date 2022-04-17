@@ -21,7 +21,6 @@ const loginUser = async (loginData) => {
 const signupUser = async (signupData) => {
     try {
         const res = await axios.post('/api/auth/signup', { ...signupData })
-        console.log(res)
         if (res.status === 201 || 200) {
             return {
                 data: res.data.encodedToken,

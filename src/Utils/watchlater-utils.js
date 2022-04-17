@@ -14,7 +14,6 @@ const addToWatchlater = async (clickedVideo) => {
                 video: clickedVideo
             }
         })
-        console.log("RESPONSE", res)
         if (res.status === 201) {
             return {
                 data: res.data,
@@ -33,7 +32,6 @@ const addToWatchlater = async (clickedVideo) => {
 const fetchWatchlaterVideos = async () => {
     try {
         const res = axios.get('/api/user/watchlater')
-        console.log("RESPONSE", res)
         if (res.status === 201) {
             return {
                 data: res.data,
@@ -53,7 +51,6 @@ const fetchWatchlaterVideos = async () => {
 const deleteFromWatchlater = async (videoId) => {
     try {
         const res = await axios.delete(`/api/user/watchlater/${videoId}`)
-        console.log("RESPONSE", res)
         if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data,
