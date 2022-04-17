@@ -33,7 +33,6 @@ const createPlaylist = async (playlistTitle, playlistDesc) => {
         const res = await axios.post("/api/user/playlists",
             { playlist: { title: playlistTitle, description: playlistDesc } },
         )
-        console.log(res)
         if (res.status === 200 || res.status === 201) {
             return {
                 data: res.data,

@@ -72,7 +72,6 @@ const clearHistory = async () => {
 
 const sendUserHistory = async (clickedVideo) => {
     const { data } = await fetchUserHistory()
-    console.log("HISTORY FETCH", data.history)
     const foundInHistory = data?.history.some(video => video._id === clickedVideo._id)
     if (foundInHistory === false) {
         try {
@@ -83,7 +82,6 @@ const sendUserHistory = async (clickedVideo) => {
                     video: clickedVideo
                 }
             })
-            console.log("RESPONSE", res)
             if (res.status === 201 || res.status === 200) {
                 return {
                     data: res.data,

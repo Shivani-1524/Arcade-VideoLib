@@ -21,7 +21,6 @@ const VideoCard = ({ props, type, playlistId }) => {
 
     const handlePlaylistVideoDelete = async (playlistId, videoId) => {
         const { data, errorData } = await removeVideoFromPlaylist(playlistId, videoId)
-        console.log(data)
         !errorData[0] ? playlistDispatch({ type: 'UPDATE_PLAYLIST_VIDEO', payload: data?.playlist }) : console.error(errorData[1])
     }
 

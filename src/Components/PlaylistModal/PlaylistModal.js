@@ -40,7 +40,6 @@ const PlaylistModal = () => {
       }
     }
     const { data, errorData } = await fetchUserPlaylists()
-    console.log(data?.playlists)
     !errorData[0] ? playlistDispatch({ type: "UPDATE_PLAYLIST", payload: data?.playlists }) : console.error(errorData[1])
     setVidPlaylistEntry([])
     setVidPlaylistDelete([])
