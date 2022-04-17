@@ -51,22 +51,22 @@ const fetchWatchlaterVideos = async () => {
 }
 
 const deleteFromWatchlater = async (videoId) => {
-    // try {
-    const res = await axios.delete(`/api/user/watchlater/${videoId}`)
-    console.log("RESPONSE", res)
-    //     if (res.status === 201) {
-    //         return {
-    //             data: res.data,
-    //             errorData: [false]
-    //         }
-    //     }
-    // } catch (err) {
-    //     console.error(err)
-    //     return {
-    //         data: "",
-    //         errorData: [true, err]
-    //     }
-    // }
+    try {
+        const res = await axios.delete(`/api/user/watchlater/${videoId}`)
+        console.log("RESPONSE", res)
+        if (res.status === 201 || res.status === 200) {
+            return {
+                data: res.data,
+                errorData: [false]
+            }
+        }
+    } catch (err) {
+        console.error(err)
+        return {
+            data: "",
+            errorData: [true, err]
+        }
+    }
 
 }
 

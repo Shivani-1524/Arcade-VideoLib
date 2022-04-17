@@ -4,9 +4,11 @@ import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
 import './videocard.css'
 import { deleteHistoryVideo } from '../../Utils/history-utils'
 import { addLikedVideo, removeLikedVideo } from '../../Utils/likevideo-utils'
+import { addToWatchlater, deleteFromWatchlater } from '../../Utils/watchlater-utils'
 import { useHistory } from '../../Context/history-provider'
 import { useAuth } from '../../Context/auth-provider'
 import { useLikedVideo } from '../../Context/likevideo-provider'
+import { useWatchlater } from '../../Context/watchlater-provider'
 import { findElementInData } from '../../Utils/common-utils'
 
 const VideoCard = ({ props, type }) => {
@@ -17,6 +19,7 @@ const VideoCard = ({ props, type }) => {
     const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
+    const { watchlaterDispatch } = useWatchlater()
 
     const handleHistoryDelete = async (videoId) => {
         const { data, errorData } = await deleteHistoryVideo(videoId)
@@ -25,6 +28,10 @@ const VideoCard = ({ props, type }) => {
     const handleLikeDelete = async (videoId) => {
         const { data, errorData } = await removeLikedVideo(videoId)
         !errorData[0] ? likedVideoDispatch({ type: "UPDATE_LIKEDLIST", payload: data?.likes }) : console.error(errorData[1])
+    }
+    const handleWatchlaterDelete = async (videoId) => {
+        const { data, errorData } = await deleteFromWatchlater(videoId)
+        !errorData[0] ? watchlaterDispatch({ type: 'UPDATE_WATCHLATER', payload: data?.watchlater }) : console.error(errorData[1])
     }
 
     const isLikedVideo = findElementInData(likedVideoState.likedVideoList, _id)
@@ -40,6 +47,12 @@ const VideoCard = ({ props, type }) => {
             case "like":
                 return (
                     <button onClick={() => handleLikeDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
+                        <i className="close-icon fas fa-times-circle delete-icon"></i>
+                    </button>
+                )
+            case "watchlater":
+                return (
+                    <button onClick={() => handleWatchlaterDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
                         <i className="close-icon fas fa-times-circle delete-icon"></i>
                     </button>
                 )
@@ -76,7 +89,7 @@ const VideoCard = ({ props, type }) => {
                 <div onClick={() => setIsDrawerHidden(prev => !prev)} className='bg-kebab'>
                     <i className="fas fa fa-solid fa-ellipsis-vertical"></i>
                 </div>
-                {!isDrawerHidden && <VideoDrawer />}
+                {!isDrawerHidden && <VideoDrawer selectedVid={props} />}
             </div>
         </div>
     )
