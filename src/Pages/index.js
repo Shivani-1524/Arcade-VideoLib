@@ -7,4 +7,5 @@ import { LogoutPage } from "./AuthPages/LogoutPage"
 import { LikedVideoPage } from "./LikedVideoPage/LikedVideoPage"
 import { HistoryPage } from "./HistoryPage/HistoryPage"
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage"
-export { LoginPage, TemplatePage, HomePage, SingleVideoPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage, PlaylistPage}
+import { VideoPlaylistPage } from "./PlaylistPage/VideoPlaylistPage/VideoPlaylistPage"
+export { VideoPlaylistPage, LoginPage, TemplatePage, HomePage, SingleVideoPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage, PlaylistPage }

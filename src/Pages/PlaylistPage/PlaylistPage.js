@@ -1,13 +1,17 @@
 import React from 'react'
-import { VideoCard } from '../../Components/VideoCard/VideoCard'
+import { PlaylistCard } from './PlaylistComponents/PlaylistCard'
+import { usePlaylist } from '../../Context/playlist-provider'
+import './playlistpage.css'
+import { EmptyPage } from '../../Components/EmptyPage/EmptyPage'
 
 const PlaylistPage = () => {
-  const test = ['frfed', 'ferf', 'hyth', 'fefwwae']
+  const { playlistState } = usePlaylist()
+  const orderedList = [...playlistState.playlist].reverse()
   return (
-    <div>
-      <button>Create New Playlist</button>
-      {test.map(item => <VideoCard />)}
-    </div>
+    orderedList.length > 0 ?
+      <div className='video-layout playlist-layout'>
+        {orderedList.map(playlist => <PlaylistCard playlist={playlist} />)}
+      </div> : <EmptyPage />
   )
 }
 

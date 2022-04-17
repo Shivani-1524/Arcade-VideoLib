@@ -5,8 +5,8 @@
         margin-top: 20px;
         background-color: var(--primary-color);
         color: var(--orange-color);
-
 }
+
 .hero-section h1, .hero-section .violet-txt{
         font-family: 'Audiowide', cursive;
         font-size: 2.5rem;

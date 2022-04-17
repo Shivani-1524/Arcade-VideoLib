@@ -3,13 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom'
 import './singlevideopage.css'
 import { VideoEmbed } from '../../Components/VideoEmbed/VideoEmbed'
 import { fetchVideoDetails } from '../../Utils/get-singlevideo'
-import { fetchUserHistory, sendUserHistory } from '../../Utils/history-utils'
+import { sendUserHistory } from '../../Utils/history-utils'
+import { PlaylistModal } from '../../Components/PlaylistModal/PlaylistModal'
+import { usePlaylist } from '../../Context/playlist-provider'
 
 const SingleVideoPage = () => {
     const { videoId } = useParams()
+    const { togglePlaylistModal, setTogglePlaylistModal, setSelectedVideo } = usePlaylist()
     const [videoDetails, setVideoDetails] = useState(false);
     const { videoUrl, channelName, channelImg, title, description } = videoDetails && videoDetails?.video
     const navigate = useNavigate()
+
     useEffect(() => {
         videoId ?
             (async () => {
@@ -27,6 +31,7 @@ const SingleVideoPage = () => {
         videoDetails &&
         <div>
             <VideoEmbed videoUrl={videoUrl} />
+            {togglePlaylistModal && <PlaylistModal />}
             <div className='video-desc'>
                 <div className="spc-bw">
                     <div className='video-header'>
@@ -40,7 +45,10 @@ const SingleVideoPage = () => {
                     </div>
                     <div className='video-actions'>
                         <i className="fas fa fa-solid fa-thumbs-up"></i>
-                        <i className="fa fas fa-solid fa-list-check"></i>
+                        <i onClick={() => {
+                            setSelectedVideo(videoDetails?.video)
+                            setTogglePlaylistModal(true)
+                        }} className="fa fas fa-solid fa-list-check"></i>
                         <i className="fa fas fa-solid fa-clock-rotate-left"></i>
                     </div>
                 </div>

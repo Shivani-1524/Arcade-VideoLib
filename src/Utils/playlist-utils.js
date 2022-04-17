@@ -1,36 +1,30 @@
 import axios from 'axios'
 
 const encodedToken = localStorage.getItem("userToken")
-// axios.defaults.headers.common['authorization'] = encodedToken;
+axios.defaults.headers.common['authorization'] = encodedToken;
 
 
 //GETS ALL PLAYLISTS
 const fetchUserPlaylists = async () => {
-    // try {
-    console.log("IN")
-    const res = await axios.get("/api/user/playlists", {
-        headers: {
-            authorization: encodedToken,
-        },
-    })
-    console.log(res)
-    //     if (res.status === 200 || res.status === 201) {
-    //         return {
-    //             data: res.data,
-    //             errorData: [false]
-    //         }
-    //     }
-    //     return {
-    //         data: res.data,
-    //         errorData: [true, res.statusText]
-    //     }
-    // } catch (err) {
-    //     console.error(err)
-    //     return {
-    //         data: "",
-    //         errorData: [true, "Unexpected error ocurred. Please try again Later"]
-    //     }
-    //}
+    try {
+        const res = await axios.get("/api/user/playlists")
+        if (res.status === 200 || res.status === 201) {
+            return {
+                data: res.data,
+                errorData: [false]
+            }
+        }
+        return {
+            data: res.data,
+            errorData: [true, res.statusText]
+        }
+    } catch (err) {
+        console.error(err)
+        return {
+            data: "",
+            errorData: [true, "Unexpected error ocurred. Please try again Later"]
+        }
+    }
 }
 
 //ADDS NEW PLYLIST
@@ -132,4 +126,27 @@ const removeVideoFromPlaylist = async (playlistId, videoId) => {
     }
 }
 
-export { removeVideoFromPlaylist, createPlaylist, fetchUserPlaylists, addVideoToPlaylist, removePlaylist }
+const fetchPlaylistDetails = async (playlistId) => {
+    try {
+        const res = await axios.get(`/api/user/playlists/${playlistId}`)
+        if (res.status === 200 || res.status === 201) {
+            return {
+                data: res.data,
+                errorData: [false]
+            }
+        }
+        return {
+            data: res.data,
+            errorData: [true, res.statusText]
+        }
+    } catch (err) {
+        console.error(err)
+        return {
+            data: "",
+            errorData: [true, "Unexpected error ocurred. Please try again Later"]
+        }
+    }
+
+}
+
+export { fetchPlaylistDetails, removeVideoFromPlaylist, createPlaylist, fetchUserPlaylists, addVideoToPlaylist, removePlaylist }

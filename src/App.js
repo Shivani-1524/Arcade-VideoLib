@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { RequiresAuth } from "./RequiresAuth"
 import Mockman from "mockman-js"
-import { TemplatePage, HomePage, SingleVideoPage, LoginPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage, PlaylistPage } from "./Pages/index"
+import { VideoPlaylistPage, TemplatePage, HomePage, SingleVideoPage, LoginPage, SignupPage, LogoutPage, LikedVideoPage, HistoryPage, PlaylistPage } from "./Pages/index"
 function App() {
   return (
     <div className="App">
@@ -17,6 +17,7 @@ function App() {
             <Route path="/videos/liked" element={<LikedVideoPage />} />
             <Route path="/videos/history" element={<HistoryPage />} />
             <Route path="/videos/playlists" element={<PlaylistPage />} />
+            <Route path="/videos/playlists/:playlistId" element={<VideoPlaylistPage />} />
           </Route>
         </Route>
         <Route path="/mock" element={<Mockman />} />
