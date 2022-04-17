@@ -1,0 +1,16 @@
+
+  .pl-header{
+    width: 100%;
+    padding-right: 30px;
+    display: flex;
+    justify-content: end;
+  }
+
+  .playlist-layout{
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+
+  .playlist-details-layout{
+    width: 90%;
+    margin: auto;
+  }

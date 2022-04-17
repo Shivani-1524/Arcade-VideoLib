@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './videodrawer.css'
 import { useWatchlater } from '../../Context/watchlater-provider'
 import { useAuth } from '../../Context/auth-provider'
 import { addToWatchlater, deleteFromWatchlater } from '../../Utils/watchlater-utils'
 import { findElementInData } from '../../Utils/common-utils'
 import { useNavigate } from 'react-router-dom'
+import { usePlaylist } from '../../Context/playlist-provider'
 
 const VideoDrawer = (drawerProps) => {
     const navigate = useNavigate()
@@ -27,16 +28,24 @@ const VideoDrawer = (drawerProps) => {
         }
     }
 
-    return (
-        <div className='flex-col video-drawer'>
-            <div className='kebab-item' onClick={() => { }}>
-                <p>Save To Playlist</p>
+
+    const VideoDrawer = ({ video, onSelect }) => {
+        const { setTogglePlaylistModal, setSelectedVideo } = usePlaylist()
+        return (
+            <div className='flex-col video-drawer'>
+                <div className='kebab-item' onClick={() => {
+                    setTogglePlaylistModal(true)
+                    setSelectedVideo(video)
+                    onSelect()
+                }}>
+                    <p> Save To Playlist</p>
+                </div>
+                <div className='kebab-item' onClick={handleWatchLater}>
+                    {isWatchLater ? <p>Remove from Watch Later</p> : <p>Add To Watch Later</p>}
+                </div>
             </div>
-            <div className='kebab-item' onClick={handleWatchLater}>
-                {isWatchLater ? <p>Remove from Watch Later</p> : <p>Add To Watch Later</p>}
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export { VideoDrawer }

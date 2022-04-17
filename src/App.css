@@ -7,6 +7,7 @@
   --dark-bg: #1A1C1E;
   font-size: 13px;
 }
+
 * {
   font-family: "Inter", sans-serif;
 }
@@ -15,10 +16,10 @@
 .logout-icon::before {
   content: "\f2f5";
 }
+
 .fa-circle-user::before {
   content: "\f2bd";
 }
-
 
 
 img {
@@ -36,12 +37,15 @@ img {
 a {
   text-decoration: none;
 }
+
 .light-txt {
   color: var(--light-grey);
 }
+
 .green-txt {
   color: var(--green-color);
 }
+
 .flex-row {
   justify-content: center;
 }
@@ -80,6 +84,7 @@ a {
 .new-font {
   font-family: "Audiowide", cursive;
 }
+
 .content-container {
   width: 100%;
   height: 100%;
@@ -88,6 +93,7 @@ a {
 .mg-t-60 {
   margin-top: 4.5rem;
 }
+
 .mg-t-70 {
   margin-top: 5.3rem;
 }
@@ -128,19 +134,21 @@ a {
   cursor: pointer;
 }
 
-.num-badge{
+.num-badge {
   top: -5px;
   right: -9px;
 }
 
-.video-layout{
+.video-layout {
   padding: 3rem 2rem 20px 2rem;
   display: grid;
   column-gap: 20px;
   row-gap: 3rem;
   grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr));
 }
-.empty-layout{
+
+.empty-layout {
   width: 100%;
   height: 90vh;
 }
+

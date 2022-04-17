@@ -7,14 +7,20 @@ import { sendUserHistory } from '../../Utils/history-utils'
 import { useWatchlater } from '../../Context/watchlater-provider'
 import { findElementInData } from '../../Utils/common-utils'
 import { addToWatchlater, deleteFromWatchlater } from '../../Utils/watchlater-utils'
+import { PlaylistModal } from '../../Components/PlaylistModal/PlaylistModal'
+import { usePlaylist } from '../../Context/playlist-provider'
+
+
 
 const SingleVideoPage = () => {
     const { videoId } = useParams()
     const { watchlaterState, watchlaterDispatch } = useWatchlater()
     const isWatchLater = findElementInData(watchlaterState?.watchlaterList, videoId)
+    const { togglePlaylistModal, setTogglePlaylistModal, setSelectedVideo } = usePlaylist()
     const [videoDetails, setVideoDetails] = useState(false);
     const { videoUrl, channelName, channelImg, title, description } = videoDetails && videoDetails?.video
     const navigate = useNavigate()
+
     useEffect(() => {
         videoId ?
             (async () => {
@@ -32,6 +38,7 @@ const SingleVideoPage = () => {
         videoDetails &&
         <div>
             <VideoEmbed videoUrl={videoUrl} />
+            {togglePlaylistModal && <PlaylistModal />}
             <div className='video-desc'>
                 <div className="spc-bw">
                     <div className='video-header'>
@@ -45,14 +52,17 @@ const SingleVideoPage = () => {
                     </div>
                     <div className='video-actions'>
                         <i className="fas fa fa-solid fa-thumbs-up"></i>
-                        <i className="fa fas fa-solid fa-list-check"></i>
-                        <i className={isWatchLater ? "fa fas fa-solid fa-clock-rotate-left violet-txt" : "fa fas fa-solid fa-clock-rotate-left"}></i>
-                    </div>
-                </div>
+                        <i onClick={() => {
+                            setSelectedVideo(videoDetails?.video)
+                            setTogglePlaylistModal(true)
+                        }} className="fa fas fa-solid fa-list-check"></i>
+                        <i className="fa fas fa-solid fa-clock-rotate-left"></i>
+                    </div >
+                </div >
                 <hr className='mg-t-10' />
                 <p className="sm-p desc mg-t-20">{description}</p>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './videocard.css'
 import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
-import { findElementInData, deleteHistoryVideo, addLikedVideo, removeLikedVideo, deleteFromWatchlater } from '../../Utils/index'
-import { useHistory, useAuth, useLikedVideo, useWatchlater } from '../../Context/index'
+import { removeVideoFromPlaylist, findElementInData, deleteHistoryVideo, addLikedVideo, removeLikedVideo, deleteFromWatchlater, } from '../../Utils/index'
+import { useHistory, useAuth, useLikedVideo, useWatchlater, usePlaylist } from '../../Context/index'
 
 
 const VideoCard = ({ props, type }) => {
@@ -15,7 +15,8 @@ const VideoCard = ({ props, type }) => {
     const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
-    const { watchlaterDispatch } = useWatchlater()
+    const { playlistDispatch } = usePlaylist()
+
 
     const handleHistoryDelete = async (videoId) => {
         const { data, errorData } = await deleteHistoryVideo(videoId)
@@ -31,6 +32,10 @@ const VideoCard = ({ props, type }) => {
     }
     const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
 
+    const handlePlaylistVideoDelete = async (playlistId, videoId) => {
+        const { data, errorData } = await removeVideoFromPlaylist(playlistId, videoId)
+        !errorData[0] ? playlistDispatch({ type: 'UPDATE_PLAYLIST_VIDEO', payload: data?.playlist }) : console.error(errorData[1])
+    }
 
     const topButton = (type) => {
         switch (type) {
@@ -49,6 +54,12 @@ const VideoCard = ({ props, type }) => {
             case "watchlater":
                 return (
                     <button onClick={() => handleWatchlaterDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
+                        <i className="close-icon fas fa-times-circle delete-icon"></i>
+                    </button>
+                )
+            case "playlist":
+                return (
+                    <button onClick={() => handlePlaylistVideoDelete(playlistId, _id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
                         <i className="close-icon fas fa-times-circle delete-icon"></i>
                     </button>
                 )
@@ -85,9 +96,9 @@ const VideoCard = ({ props, type }) => {
                 <div onClick={() => setIsDrawerHidden(prev => !prev)} className='bg-kebab'>
                     <i className="fas fa fa-solid fa-ellipsis-vertical"></i>
                 </div>
-                {!isDrawerHidden && <VideoDrawer selectedVid={props} />}
-            </div>
-        </div>
+                {!isDrawerHidden && <VideoDrawer video={props} onSelect={() => setIsDrawerHidden(true)} />}
+            </div >
+        </div >
     )
 }
 
