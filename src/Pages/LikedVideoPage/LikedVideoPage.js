@@ -6,13 +6,13 @@ import { VideoCard } from '../../Components/VideoCard/VideoCard'
 
 const LikedVideoPage = () => {
     const { likedVideoDispatch, likedVideoState } = useLikedVideo();
-    const orderedList = likedVideoState?.likedVideoList.reverse()
+    const orderedList = [...likedVideoState?.likedVideoList].reverse()
     useEffect(() => {
         (async () => {
             const { data, errorData } = await fetchLikedVideos()
             !errorData[0] ? likedVideoDispatch({ payload: data.likes, type: 'UPDATE_LIKEDLIST' }) : console.error(errorData[1])
         })()
-    }, []);
+    }, [likedVideoDispatch]);
     return (
         <div>
             {

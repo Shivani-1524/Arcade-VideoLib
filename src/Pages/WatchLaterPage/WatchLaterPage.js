@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-
 import { fetchWatchlaterVideos } from '../../Utils/watchlater-utils';
-import { EmptyPage } from '../../Components/EmptyPage/EmptyPage'
 import { useWatchlater } from '../../Context/watchlater-provider'
 import { VideoCard } from '../../Components/VideoCard/VideoCard'
+import { EmptyPage } from '../../Components/EmptyPage/EmptyPage'
 
 const WatchLaterPage = () => {
     const { watchlaterDispatch, watchlaterState } = useWatchlater();
@@ -13,7 +12,8 @@ const WatchLaterPage = () => {
             const { data, errorData } = await fetchWatchlaterVideos()
             !errorData[0] ? watchlaterDispatch({ payload: data.likes, type: 'UPDATE_WATCHLATER' }) : console.error(errorData[1])
         })()
-    }, []);
+    }, [watchlaterDispatch]);
+
     return (
         <div>
             {

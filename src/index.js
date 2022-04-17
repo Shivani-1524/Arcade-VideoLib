@@ -4,11 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-import { CategoryProvider } from "./Context/category-provider"
-import { AuthProvider } from './Context/auth-provider'
-import { HistoryProvider } from './Context/history-provider'
-import { LikedVideoProvider } from './Context/likevideo-provider'
-import { WatchlaterProvider } from './Context/watchlater-provider'
+import { CategoryProvider, AuthProvider, HistoryProvider, LikedVideoProvider, WatchlaterProvider } from './Context/index'
 
 // Call make Server
 makeServer();
