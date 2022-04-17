@@ -3,6 +3,7 @@ import { fetchUserHistory, sendUserHistory, deleteHistoryVideo, clearHistory } f
 import { fetchVideoDetails } from './get-singlevideo'
 import { fetchVideos } from './fetch-videolist'
 import { findElementInData } from './common-utils'
+import { addToWatchlater, deleteFromWatchlater, fetchWatchlaterVideos } from './watchlater-utils'
 import { loginUser, signupUser } from './authentication'
 
-export { fetchVideoDetails, fetchVideos, findElementInData, loginUser, signupUser, addLikedVideo, fetchLikedVideos, removeLikedVideo, fetchUserHistory, sendUserHistory, deleteHistoryVideo, clearHistory, }
+export { addToWatchlater, deleteFromWatchlater, fetchWatchlaterVideos, fetchVideoDetails, fetchVideos, findElementInData, loginUser, signupUser, addLikedVideo, fetchLikedVideos, removeLikedVideo, fetchUserHistory, sendUserHistory, deleteHistoryVideo, clearHistory, }
