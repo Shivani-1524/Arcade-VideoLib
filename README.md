@@ -8,6 +8,7 @@ a video archive for everything related to gaming from tournaments to game update
 - SingleVideoPage
 
 - Login/Signup Page
+- Watched History
 
 - PlayList Page
 
