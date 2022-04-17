@@ -7,39 +7,63 @@ import { addVideoToPlaylist, createPlaylist, fetchUserPlaylists } from '../../Ut
 const PlaylistModal = () => {
   useEffect(() => {
     (async () => {
-      await fetchUserPlaylists()
+      const res = await fetchUserPlaylists()
     })()
   }, [])
   const test = ['gte4', 'ge4tg', 'y6yt6d', 'yhtjyj']
-  const { setTogglePlaylistModal } = usePlaylist()
+  const [vidPlaylistEntry, setVidPlaylistEntry] = useState([])
+  const { setTogglePlaylistModal, selectedVideo } = usePlaylist()
   const [showPlaylistForm, setShowPlaylistForm] = useState(false)
   const [playlistTitle, setPlaylistTitle] = useState('')
   const [playlistSubtitle, setPlaylistSubtitle] = useState('')
+
+  const handleCreatePlaylist = async (e) => {
+    e.preventDefault()
+    const res = await createPlaylist(playlistTitle, playlistSubtitle)
+    //add video to playlist
+  }
+
+  const handleAddToPlaylist = async (vidEntryPlaylist) => {
+    let res;
+    for (playlist of vidEntryPlaylist) {
+      res = await addVideoToPlaylist(playlist, selectedVideo)
+    }
+    console.log(res)
+  }
+
   return (
     <div className='modal-bg center-items'>
-
       <div className='playlist-modal'>
         {showPlaylistForm ?
-          <form className='playlist-form'>
-            <button onClick={() => setTogglePlaylistModal(false)}>CLOSE</button>
-            <div>
-              <label className='plform-label'>Title</label>
-              <input className='plform-input' onChange={(e) => setPlaylistTitle(e.target.value)} type="text" placeholder='Enter Playlist Title' />
+          <form className='playlist-form pos-rel'>
+            <i onClick={() => setTogglePlaylistModal(false)} className="fa fa-times pos-abs close-icon" aria-hidden="true"></i>
+            <div className='pl-input mg-t-15'>
+              <label className='plform-label rg-p'>Title</label>
+              <input className='plform-input mg-t-5' onChange={(e) => setPlaylistTitle(e.target.value)} type="text" placeholder='Enter Playlist Title' />
             </div>
-            <div>
-              <label className='plform-label'>Subtitle</label>
-              <input className='plform-input' onChange={(e) => setPlaylistSubtitle(e.target.value)} type="text" placeholder='Enter Playlist Subtitle' />
+            <div className='pl-input mg-t-15'>
+              <label className='plform-label rg-p'>Subtitle</label>
+              <input className='plform-input mg-t-5' onChange={(e) => setPlaylistSubtitle(e.target.value)} type="text" placeholder='Enter Playlist Subtitle' />
             </div>
+            <button type='submit' onClick={(e) => handleCreatePlaylist(e, playlistTitle, playlistSubtitle)} className="btn primary-btn solid mg-t-10">
+              Done
+            </button>
           </form> :
-
-          <div>
-            <button onClick={() => setTogglePlaylistModal(false)}>CLOSE</button>
-            <p className='sm-p' onClick={() => setShowPlaylistForm(true)}>Create New PLaylist</p>
-            {test.map(item =>
-              <div className='playlist-items'>
-                <input htmlFor={item} type="checkbox" />
-                <label id={item}>{item}</label>
-              </div>)}
+          <div className='pos-rel'>
+            <i onClick={() => setTogglePlaylistModal(false)} className="fa fa-times pos-abs close-icon" aria-hidden="true"></i>
+            <div className='pl-modal-layout'>
+              <p className='rg-p mg-t-20' onClick={() => setShowPlaylistForm(true)}>Create New Playlist <i className="fa fa-solid fa-plus"></i></p>
+              {test.map(item =>
+                <div className='playlist-items rg-p'>
+                  <input id={item} onChange={(e) => {
+                    e.target.checked && setVidPlaylistEntry(prev => [...prev, item])
+                  }} type="checkbox" />
+                  <label htmlFor={item}>{item}</label>
+                </div>)}
+              <button onClick={() => handleAddToPlaylist()} className="btn primary-btn solid mg-t-10">
+                Done
+              </button>
+            </div>
           </div>
 
         }

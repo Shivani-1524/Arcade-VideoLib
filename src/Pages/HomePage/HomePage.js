@@ -41,7 +41,7 @@ const HomePage = () => {
             </div>
             <div className='video-layout'>
                 {videoList.map(video => {
-                    if (videoCategory === video.category || "All") {
+                    if (videoCategory === video.category || videoCategory === "All") {
                         return <VideoCard key={video._id} props={video} />
                     }
                     return null

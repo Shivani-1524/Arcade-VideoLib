@@ -3,7 +3,7 @@ import axios from 'axios'
 const fetchVideoDetails = async (videoId) => {
     try {
         const res = await axios.get(`/api/video/${videoId}`)
-        if (res.status === 200) {
+        if (res.status === 200 || res.status === 201) {
             return {
                 data: res.data,
                 msg: "Data retrieved",
