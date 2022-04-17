@@ -3,7 +3,6 @@ import { useCategory } from "../../../Context/category-provider"
 
 const CategoryChip = ({ props }) => {
     const { title } = props
-    // const [setCategorySelect, categorySelect] = useState(false);
     const { videoCategory, setVideoCategory } = useCategory()
     return (
         <div onClick={() => setVideoCategory(title)}

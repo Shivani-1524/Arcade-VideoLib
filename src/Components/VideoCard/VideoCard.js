@@ -7,9 +7,9 @@ import { addLikedVideo, removeLikedVideo } from '../../Utils/likevideo-utils'
 import { useHistory } from '../../Context/history-provider'
 import { useAuth } from '../../Context/auth-provider'
 import { useLikedVideo } from '../../Context/likevideo-provider'
+import { findElementInData } from '../../Utils/common-utils'
 
 const VideoCard = ({ props, type }) => {
-    console.log(type)
     const [isDrawerHidden, setIsDrawerHidden] = useState(true);
     const { historyDispatch } = useHistory()
     const [toggleLike, setToggleLike] = useState(false);
@@ -22,7 +22,12 @@ const VideoCard = ({ props, type }) => {
         const { data, errorData } = await deleteHistoryVideo(videoId)
         !errorData[0] ? historyDispatch({ type: "UPDATE_HISTORY", payload: data }) : console.error(errorData[1])
     }
+    const handleLikeDelete = async (videoId) => {
+        const { data, errorData } = await removeLikedVideo(videoId)
+        !errorData[0] ? likedVideoDispatch({ type: "UPDATE_LIKEDLIST", payload: data?.likes }) : console.error(errorData[1])
+    }
 
+    const isLikedVideo = findElementInData(likedVideoState.likedVideoList, _id)
 
     const topButton = (type) => {
         switch (type) {
@@ -34,7 +39,7 @@ const VideoCard = ({ props, type }) => {
                 )
             case "like":
                 return (
-                    <button onClick={() => handleHistoryDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
+                    <button onClick={() => handleLikeDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
                         <i className="close-icon fas fa-times-circle delete-icon"></i>
                     </button>
                 )
@@ -49,7 +54,7 @@ const VideoCard = ({ props, type }) => {
                     }
                 }}
                     className="btn icon-btn pos-abs top-right star-toggle-btn">
-                    {toggleLike ? <i className="fas fa-star filled"></i> : <i className="fas fa-star"></i>}
+                    {toggleLike || isLikedVideo ? <i className="fas fa-star filled"></i> : <i className="fas fa-star"></i>}
                 </button>
                 )
         }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { VideoCard } from '../../Components/VideoCard/VideoCard'
 import { CategoryChip } from './HomeComponent/CategoryChip'
 import { fetchVideos } from '../../Utils/fetch-videolist'
-import { fetchLikedVideos } from '../../Utils/likevideo-utils'
 import './homepage.css'
 import { useCategory } from '../../Context/category-provider'
 
@@ -11,12 +10,12 @@ const HomePage = () => {
     const [videoList, setvideoList] = useState([]);
     const [whiteBg, setWhiteBg] = useState(false)
     const [searchVal, setSearchVal] = useState('')
+    const [isLikedVideo, setIsLikedVideo] = useState(false)
     const { videoCategory } = useCategory()
 
     useEffect(() => {
         (async () => {
             const { data, errorData } = await fetchVideos();
-            const { data: likedData0 = -, errroData } = await fetchLikedVideos()
             !errorData[0] ? setvideoList(data) : console.log(errorData[1])
         })()
     }, []);
@@ -43,7 +42,7 @@ const HomePage = () => {
                     video.title.toLowerCase().includes(searchVal.toLowerCase()))
                     .map(video => {
 
-                        if (videoCategory === video.category || "All") {
+                        if (videoCategory === video.category || videoCategory === "All") {
                             return <VideoCard key={video._id} props={video} type='default' />
                         }
                         return null
