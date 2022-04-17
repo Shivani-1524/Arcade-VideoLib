@@ -1,52 +1,57 @@
-.card{
-    width: min-content;
-    grid-template-rows: auto auto;
-}
-.card .img-container{
-    width: 320px;
-    height: 150px;
+.card {
+  width: min-content;
+  grid-template-rows: auto auto;
 }
 
-.card .text-card{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 1.1rem;
+.card .img-container {
+  width: 24.6rem;
+  height: 11.5rem;
 }
 
-.text-card i{
-    font-size: 1.4rem;
+.card .text-card {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1.1rem;
+}
+
+.text-card i {
+  font-size: 1.4rem;
 }
 
 .fa-ellipsis-vertical:before {
-    content: "\f142";
-  }
-  .fa-circle-minus:before{
-    content: "\f056";
-  }
-  .delete-icon.fa-times-circle{
-    color: var(--orange-color);
-  }
+  content: "\f142";
+}
 
-  .star-toggle-btn i {
-    color: var(--white);
-  }
-  .star-toggle-btn i.filled {
-    color: var(--yellow-color);
-  }
-  .star-toggle-btn:hover {
-    background-color: transparent;
-  }
-  
-  .btn.icon-btn.top-right {
-    top: 0;
-    right: 0;
-  }
-  
-  .card:hover {
-    cursor: pointer;
-  }
-  
-  .bg-kebab{
-    padding: 5px;
-    padding-left: 7px;
-  }
+.fa-circle-minus:before {
+  content: "\f056";
+}
+
+.delete-icon.fa-times-circle {
+  color: var(--orange-color);
+}
+
+.star-toggle-btn i {
+  color: var(--white);
+}
+
+.star-toggle-btn i.filled {
+  color: var(--yellow-color);
+}
+
+.star-toggle-btn:hover {
+  background-color: transparent;
+}
+
+.btn.icon-btn.top-right {
+  top: 0;
+  right: 0;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.bg-kebab {
+  padding: 5px;
+  padding-left: 7px;
+}
