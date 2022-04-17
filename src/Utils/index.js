@@ -5,5 +5,6 @@ import { fetchVideos } from './fetch-videolist'
 import { findElementInData } from './common-utils'
 import { addToWatchlater, deleteFromWatchlater, fetchWatchlaterVideos } from './watchlater-utils'
 import { loginUser, signupUser } from './authentication'
+import { fetchPlaylistDetails, removeVideoFromPlaylist, createPlaylist, fetchUserPlaylists, addVideoToPlaylist, removePlaylist } from './playlist-utils'
 
-export { addToWatchlater, deleteFromWatchlater, fetchWatchlaterVideos, fetchVideoDetails, fetchVideos, findElementInData, loginUser, signupUser, addLikedVideo, fetchLikedVideos, removeLikedVideo, fetchUserHistory, sendUserHistory, deleteHistoryVideo, clearHistory, }
+export { fetchPlaylistDetails, removeVideoFromPlaylist, createPlaylist, fetchUserPlaylists, addVideoToPlaylist, removePlaylist, addToWatchlater, deleteFromWatchlater, fetchWatchlaterVideos, fetchVideoDetails, fetchVideos, findElementInData, loginUser, signupUser, addLikedVideo, fetchLikedVideos, removeLikedVideo, fetchUserHistory, sendUserHistory, deleteHistoryVideo, clearHistory, }

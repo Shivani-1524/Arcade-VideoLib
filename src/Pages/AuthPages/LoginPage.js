@@ -23,6 +23,7 @@ const LoginPage = () => {
         location.state ? navigate(location?.state?.from?.pathname) : navigate('/')
       }
       else {
+        console.log(errorData[1])
         setLoginError(msg)
       }
     } catch (err) {
