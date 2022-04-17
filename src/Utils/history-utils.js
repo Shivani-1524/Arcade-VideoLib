@@ -6,15 +6,15 @@ axios.defaults.headers.common['authorization'] = encodedToken;
 const fetchUserHistory = async () => {
     try {
         const res = await axios.get("/api/user/history")
-        if (res.status === 200) {
+        if (res.status === 201 || 200) {
             return {
                 data: res.data,
                 errorData: [false]
             }
         }
         return {
-            data: res.data,
-            errorData: [true, res.statusText]
+            data: '',
+            errorData: [true, res]
         }
     } catch (err) {
         console.error(err)
@@ -28,7 +28,7 @@ const fetchUserHistory = async () => {
 const deleteHistoryVideo = async (videoId) => {
     try {
         const res = await axios.delete(`/api/user/history/${videoId}`)
-        if (res.status === 200) {
+        if (res.status === 201 || 200) {
             return {
                 data: res.data.history,
                 errorData: [false]
@@ -36,7 +36,7 @@ const deleteHistoryVideo = async (videoId) => {
         }
         return {
             data: "",
-            errorData: [true, res.statusText]
+            errorData: [true, res]
         }
     } catch (err) {
         console.error(err)
@@ -50,7 +50,7 @@ const deleteHistoryVideo = async (videoId) => {
 const clearHistory = async () => {
     try {
         const res = await axios.delete("/api/user/history/all")
-        if (res.status === 200) {
+        if (res.status === 201 || 200) {
             return {
                 data: res.data.history,
                 errorData: [false]
@@ -58,7 +58,7 @@ const clearHistory = async () => {
         }
         return {
             data: "",
-            errorData: [true, res.status]
+            errorData: [true, res]
         }
     }
     catch (err) {
@@ -72,7 +72,6 @@ const clearHistory = async () => {
 
 const sendUserHistory = async (clickedVideo) => {
     const { data } = await fetchUserHistory()
-    console.log("HISTORY FETCH", data.history)
     const foundInHistory = data?.history.some(video => video._id === clickedVideo._id)
     if (foundInHistory === false) {
         try {
@@ -83,12 +82,15 @@ const sendUserHistory = async (clickedVideo) => {
                     video: clickedVideo
                 }
             })
-            console.log("RESPONSE", res)
-            if (res.status === 201) {
+            if (res.status === 201 || 200) {
                 return {
                     data: res.data,
                     errorData: [false]
                 }
+            }
+            return {
+                data: "",
+                errorData: [true, res]
             }
         } catch (err) {
             console.error(err)

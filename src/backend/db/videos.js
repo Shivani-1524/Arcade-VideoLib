@@ -20,7 +20,7 @@ export const videos = [
   },
   {
     _id: uuidv4(),
-    title: "2 Pros Vs 5 Noobs in Valorant",
+    title: "2 Pros Vs 5 Noobs in Valorant || SEN TENZ",
     description:
       "The pros playing 2 versus 5 against noobs in valorant, lets see if its experience or quantity that finally wins",
     videoUrl: "https://www.youtube.com/watch?v=oJSdnwbFLVo",
@@ -53,7 +53,7 @@ export const videos = [
   },
   {
     _id: uuidv4(),
-    title: "Cold ❄️ (Valorant Montage)",
+    title: "Cold ❄️ (Valorant GamePlay Montage)",
     description:
       "A super cool (see what i did there ;)) montage with precise aim and inhuman gameplay.",
     videoUrl: "https://www.youtube.com/watch?v=8KKGT4JXPVY",
@@ -64,7 +64,7 @@ export const videos = [
   },
   {
     _id: uuidv4(),
-    title: "Grand final! sentinels Vs 100T",
+    title: "Grand final! sentinels Vs 100T || Valorant",
     description:
       "The Grand finale of sentinels versus 100T. this includes moments of friendly flashes and TenZ playing Reyna what else could you ask for? ",
     videoUrl: "https://www.youtube.com/watch?v=jcY60vL7208",

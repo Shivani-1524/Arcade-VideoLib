@@ -14,7 +14,7 @@ const Sidenav = () => {
             <NavLink to="/videos/liked" className={({ isActive }) => activeStyle(isActive)}>
                 <i className="fa fa-solid fa-thumbs-up"></i>
                 Liked Videos</NavLink>
-            <NavLink to="/videos/later" className={({ isActive }) => activeStyle(isActive)}>
+            <NavLink to="/videos/watchlater" className={({ isActive }) => activeStyle(isActive)}>
                 <i className="fa fa-solid fa-clock"></i>
                 Watch Later</NavLink>
             <NavLink to="/videos/history" className={({ isActive }) => activeStyle(isActive)}>

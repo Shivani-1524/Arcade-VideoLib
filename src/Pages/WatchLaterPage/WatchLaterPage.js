@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { fetchLikedVideos } from '../../Utils/likevideo-utils';
+
+import { fetchWatchlaterVideos } from '../../Utils/watchlater-utils';
 import { EmptyPage } from '../../Components/EmptyPage/EmptyPage'
-import { useLikedVideo } from '../../Context/likevideo-provider'
+import { useWatchlater } from '../../Context/watchlater-provider'
 import { VideoCard } from '../../Components/VideoCard/VideoCard'
 
-const LikedVideoPage = () => {
-    const { likedVideoDispatch, likedVideoState } = useLikedVideo();
-    const orderedList = likedVideoState?.likedVideoList.reverse()
+const WatchLaterPage = () => {
+    const { watchlaterDispatch, watchlaterState } = useWatchlater();
+    const orderedList = watchlaterState?.watchlaterList.reverse()
     useEffect(() => {
         (async () => {
-            const { data, errorData } = await fetchLikedVideos()
-            !errorData[0] ? likedVideoDispatch({ payload: data.likes, type: 'UPDATE_LIKEDLIST' }) : console.error(errorData[1])
+            const { data, errorData } = await fetchWatchlaterVideos()
+            !errorData[0] ? watchlaterDispatch({ payload: data.likes, type: 'UPDATE_WATCHLATER' }) : console.error(errorData[1])
         })()
     }, []);
     return (
@@ -20,7 +21,7 @@ const LikedVideoPage = () => {
                     <div>
                         <div className='video-layout'>
                             {orderedList.map(video =>
-                                <VideoCard key={video._id} props={video} type={"like"} />)
+                                <VideoCard key={video._id} props={video} type={"watchlater"} />)
                             }
                         </div>
                     </div>
@@ -31,4 +32,4 @@ const LikedVideoPage = () => {
     )
 }
 
-export { LikedVideoPage }
+export { WatchLaterPage }
