@@ -30,5 +30,4 @@ const LikedVideoPage = () => {
         </div>
     )
 }
-
 export { LikedVideoPage }

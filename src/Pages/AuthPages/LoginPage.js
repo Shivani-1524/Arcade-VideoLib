@@ -29,6 +29,7 @@ const LoginPage = () => {
       setLoginError('Unexpected Error ocurred.')
     }
   }
+
   return (
     <div>
       <Navbar />
