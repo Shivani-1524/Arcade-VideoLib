@@ -33,6 +33,12 @@
     align-items: center;
     height: 100%;
 }
+.btn-createpl{
+    cursor: pointer;
+}
+.btn-createpl:hover{
+    color: var(--yellow-color-light);
+}
 
 .close-icon {
     top: 10px;

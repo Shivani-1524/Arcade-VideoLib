@@ -35,31 +35,28 @@ const fetchUserPlaylists = async () => {
 
 //ADDS NEW PLYLIST
 const createPlaylist = async (playlistTitle, playlistDesc) => {
-    // try {
-    const res = await axios.post("/api/user/playlists",
-        { playlist: { title: playlistTitle, description: playlistDesc } }, {
-        headers: {
-            authorization: encodedToken,
-        },
-    })
-    console.log(res)
-    //     if (res.status === 200 || res.status === 201) {
-    //         return {
-    //             data: res.data,
-    //             errorData: [false]
-    //         }
-    //     }
-    //     return {
-    //         data: res.data,
-    //         errorData: [true, res.statusText]
-    //     }
-    // } catch (err) {
-    //     console.error(err)
-    //     return {
-    //         data: "",
-    //         errorData: [true, "Unexpected error ocurred. Please try again Later"]
-    //     }
-    // }
+    try {
+        const res = await axios.post("/api/user/playlists",
+            { playlist: { title: playlistTitle, description: playlistDesc } },
+        )
+        console.log(res)
+        if (res.status === 200 || res.status === 201) {
+            return {
+                data: res.data,
+                errorData: [false]
+            }
+        }
+        return {
+            data: res.data,
+            errorData: [true, res.statusText]
+        }
+    } catch (err) {
+        console.error(err)
+        return {
+            data: "",
+            errorData: [true, "Unexpected error ocurred. Please try again Later"]
+        }
+    }
 }
 
 //DELETES PLAYLIST

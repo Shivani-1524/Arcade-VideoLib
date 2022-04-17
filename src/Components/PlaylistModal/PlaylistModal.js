@@ -12,20 +12,21 @@ const PlaylistModal = () => {
   }, [])
   const test = ['gte4', 'ge4tg', 'y6yt6d', 'yhtjyj']
   const [vidPlaylistEntry, setVidPlaylistEntry] = useState([])
-  const { setTogglePlaylistModal, selectedVideo } = usePlaylist()
+  const { setTogglePlaylistModal, selectedVideo, playlistState, playlistDispatch } = usePlaylist()
   const [showPlaylistForm, setShowPlaylistForm] = useState(false)
   const [playlistTitle, setPlaylistTitle] = useState('')
   const [playlistSubtitle, setPlaylistSubtitle] = useState('')
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault()
-    const res = await createPlaylist(playlistTitle, playlistSubtitle)
+    const { data, errorData } = await createPlaylist(playlistTitle, playlistSubtitle)
+    !errorData[0] ? playlistDispatch({ type: "UPDATE_PLAYLIST", payload: data?.playlists }) : console.error(errorData[1])
     //add video to playlist
   }
 
   const handleAddToPlaylist = async (vidEntryPlaylist) => {
     let res;
-    for (playlist of vidEntryPlaylist) {
+    for (let playlist of vidEntryPlaylist) {
       res = await addVideoToPlaylist(playlist, selectedVideo)
     }
     console.log(res)
@@ -52,7 +53,7 @@ const PlaylistModal = () => {
           <div className='pos-rel'>
             <i onClick={() => setTogglePlaylistModal(false)} className="fa fa-times pos-abs close-icon" aria-hidden="true"></i>
             <div className='pl-modal-layout'>
-              <p className='rg-p mg-t-20' onClick={() => setShowPlaylistForm(true)}>Create New Playlist <i className="fa fa-solid fa-plus"></i></p>
+              <p className='rg-p mg-t-20 btn-createpl' onClick={() => setShowPlaylistForm(true)}>Create New Playlist <i className="fa fa-solid fa-plus"></i></p>
               {test.map(item =>
                 <div className='playlist-items rg-p'>
                   <input id={item} onChange={(e) => {
