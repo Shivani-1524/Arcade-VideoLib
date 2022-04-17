@@ -6,7 +6,7 @@ import { VideoCard } from '../../Components/VideoCard/VideoCard'
 
 const LikedVideoPage = () => {
     const { likedVideoDispatch, likedVideoState } = useLikedVideo();
-    const orderedList = likedVideoState?.likedVideoList.reverse()
+    const orderedList = [...likedVideoState?.likedVideoList].reverse()
     useEffect(() => {
         (async () => {
             const { data, errorData } = await fetchLikedVideos()

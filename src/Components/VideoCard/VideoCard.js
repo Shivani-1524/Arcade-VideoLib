@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
 import './videocard.css'
-import { deleteHistoryVideo } from '../../Utils/history-utils'
-import { addLikedVideo, removeLikedVideo } from '../../Utils/likevideo-utils'
-import { useHistory } from '../../Context/history-provider'
-import { useAuth } from '../../Context/auth-provider'
-import { useLikedVideo } from '../../Context/likevideo-provider'
-import { findElementInData } from '../../Utils/common-utils'
+import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
+import { findElementInData, deleteHistoryVideo, addLikedVideo, removeLikedVideo } from '../../Utils/index'
+import { useHistory, useAuth, useLikedVideo } from '../../Context/index'
+
 
 const VideoCard = ({ props, type }) => {
+
+    const { _id, title, channelName, thumbnail } = props
     const [isDrawerHidden, setIsDrawerHidden] = useState(true);
     const { historyDispatch } = useHistory()
     const [toggleLike, setToggleLike] = useState(false);
-    const { _id, title, channelName, thumbnail } = props
     const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
@@ -26,8 +24,8 @@ const VideoCard = ({ props, type }) => {
         const { data, errorData } = await removeLikedVideo(videoId)
         !errorData[0] ? likedVideoDispatch({ type: "UPDATE_LIKEDLIST", payload: data?.likes }) : console.error(errorData[1])
     }
+    const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
 
-    const isLikedVideo = findElementInData(likedVideoState.likedVideoList, _id)
 
     const topButton = (type) => {
         switch (type) {

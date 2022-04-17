@@ -7,7 +7,7 @@ import './historypage.css'
 
 const HistoryPage = () => {
     const { historyState, historyDispatch } = useHistory()
-    const orderedHistory = [...historyState.historyList].reverse()
+    const orderedHistory = [...historyState?.historyList].reverse()
     const handleHistoryClearAll = async () => {
         const { data, errorData } = await clearHistory()
         !errorData[0] ? historyDispatch({ type: "UPDATE_HISTORY", payload: data }) : console.error(errorData[1])
