@@ -1,5 +1,5 @@
 # Arcade-VideoLibrary
-a video archive for everything related to gaming from tournaments to game updates and legendary plays
+A video archive for everything related to gaming from tournaments to game updates and legendary plays
 
 ## Features
  
@@ -8,6 +8,7 @@ a video archive for everything related to gaming from tournaments to game update
 - SingleVideoPage
 
 - Login/Signup Page
+- Authentication
 - Watched History
 
 - PlayList Page
