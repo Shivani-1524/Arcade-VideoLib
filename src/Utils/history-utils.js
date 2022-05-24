@@ -6,7 +6,7 @@ axios.defaults.headers.common['authorization'] = encodedToken;
 const fetchUserHistory = async () => {
     try {
         const res = await axios.get("/api/user/history")
-        if (res.status === 201 || 200) {
+        if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data,
                 errorData: [false]
@@ -28,7 +28,7 @@ const fetchUserHistory = async () => {
 const deleteHistoryVideo = async (videoId) => {
     try {
         const res = await axios.delete(`/api/user/history/${videoId}`)
-        if (res.status === 201 || 200) {
+        if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data.history,
                 errorData: [false]
@@ -50,7 +50,7 @@ const deleteHistoryVideo = async (videoId) => {
 const clearHistory = async () => {
     try {
         const res = await axios.delete("/api/user/history/all")
-        if (res.status === 201 || 200) {
+        if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data.history,
                 errorData: [false]
@@ -82,8 +82,7 @@ const sendUserHistory = async (clickedVideo) => {
                     video: clickedVideo
                 }
             })
-            console.log("RESPONSE", res)
-            if (res.status === 201 || 200) {
+            if (res.status === 201 || res.status === 200) {
                 return {
                     data: res.data,
                     errorData: [false]

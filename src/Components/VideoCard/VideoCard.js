@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './videocard.css'
 import { VideoDrawer } from '../VideoDrawer/VideoDrawer'
-import { findElementInData, deleteHistoryVideo, addLikedVideo, removeLikedVideo } from '../../Utils/index'
-import { useHistory, useAuth, useLikedVideo } from '../../Context/index'
+import { removeVideoFromPlaylist, findElementInData, deleteHistoryVideo, addLikedVideo, removeLikedVideo, deleteFromWatchlater, } from '../../Utils/index'
+import { useHistory, useAuth, useLikedVideo, useWatchlater, usePlaylist } from '../../Context/index'
 
 
-const VideoCard = ({ props, type }) => {
+const VideoCard = ({ props, type, playlistId }) => {
 
     const { _id, title, channelName, thumbnail } = props
     const [isDrawerHidden, setIsDrawerHidden] = useState(true);
     const { historyDispatch } = useHistory()
-    const [toggleLike, setToggleLike] = useState(false);
     const { isLoggedIn } = useAuth()
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
+    const { playlistDispatch } = usePlaylist()
+    const watchlaterDispatch = useWatchlater()
+    const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
+    const [toggleLike, setToggleLike] = useState(isLikedVideo);
+
 
     const handleHistoryDelete = async (videoId) => {
         const { data, errorData } = await deleteHistoryVideo(videoId)
@@ -24,8 +28,16 @@ const VideoCard = ({ props, type }) => {
         const { data, errorData } = await removeLikedVideo(videoId)
         !errorData[0] ? likedVideoDispatch({ type: "UPDATE_LIKEDLIST", payload: data?.likes }) : console.error(errorData[1])
     }
-    const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
+    const handleWatchlaterDelete = async (videoId) => {
+        const { data, errorData } = await deleteFromWatchlater(videoId)
+        !errorData[0] ? watchlaterDispatch({ type: 'UPDATE_WATCHLATER', payload: data?.watchlater }) : console.error(errorData[1])
+    }
 
+
+    const handlePlaylistVideoDelete = async (playlistId, videoId) => {
+        const { data, errorData } = await removeVideoFromPlaylist(playlistId, videoId)
+        !errorData[0] ? playlistDispatch({ type: 'UPDATE_PLAYLIST_VIDEO', payload: data?.playlist }) : console.error(errorData[1])
+    }
 
     const topButton = (type) => {
         switch (type) {
@@ -41,11 +53,23 @@ const VideoCard = ({ props, type }) => {
                         <i className="close-icon fas fa-times-circle delete-icon"></i>
                     </button>
                 )
+            case "watchlater":
+                return (
+                    <button onClick={() => handleWatchlaterDelete(_id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
+                        <i className="close-icon fas fa-times-circle delete-icon"></i>
+                    </button>
+                )
+            case "playlist":
+                return (
+                    <button onClick={() => handlePlaylistVideoDelete(playlistId, _id)} className="btn icon-btn pos-abs top-right star-toggle-btn">
+                        <i className="close-icon fas fa-times-circle delete-icon"></i>
+                    </button>
+                )
             default:
                 return (<button onClick={async () => {
                     if (isLoggedIn) {
                         setToggleLike(prev => !prev)
-                        const { data, errorData } = !toggleLike ? await addLikedVideo(props) : await removeLikedVideo(props._id)
+                        const { data, errorData } = !toggleLike || !isLikedVideo ? await addLikedVideo(props) : await removeLikedVideo(props._id)
                         !errorData[0] ? likedVideoDispatch({ type: 'UPDATE_LIKEDLIST', payload: data.likes }) : console.error(errorData[1])
                     } else {
                         navigate('/login')
@@ -74,9 +98,9 @@ const VideoCard = ({ props, type }) => {
                 <div onClick={() => setIsDrawerHidden(prev => !prev)} className='bg-kebab'>
                     <i className="fas fa fa-solid fa-ellipsis-vertical"></i>
                 </div>
-                {!isDrawerHidden && <VideoDrawer />}
-            </div>
-        </div>
+                {!isDrawerHidden && <VideoDrawer video={props} onSelect={() => setIsDrawerHidden(true)} />}
+            </div >
+        </div >
     )
 }
 

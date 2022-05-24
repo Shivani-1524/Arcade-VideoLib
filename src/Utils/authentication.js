@@ -3,7 +3,7 @@ import axios from 'axios'
 const loginUser = async (loginData) => {
     try {
         const res = await axios.post('/api/auth/login', { ...loginData })
-        if (res.status === 201 || 200) {
+        if (res.status === 200) {
             return {
                 data: res.data.encodedToken,
                 msg: "Logged in Successfully",
@@ -22,7 +22,7 @@ const signupUser = async (signupData) => {
     try {
         const res = await axios.post('/api/auth/signup', { ...signupData })
         console.log(res)
-        if (res.status === 201 || 200) {
+        if (res.status === 201) {
             return {
                 data: res.data.encodedToken,
                 msg: "Signed Up Successfully",
@@ -38,5 +38,4 @@ const signupUser = async (signupData) => {
         }
     }
 }
-
 export { loginUser, signupUser }

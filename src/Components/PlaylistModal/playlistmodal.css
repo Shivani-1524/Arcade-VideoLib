@@ -1,0 +1,61 @@
+.modal-bg {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.53);
+    width: 100%;
+    height: 100%;
+}
+
+.playlist-modal {
+    /* left: 50%; 
+    top: 35%; */
+    width: 25rem;
+    height: max-content;
+
+    background-color: var(--primary-color);
+    color: var(--white);
+    /* position: absolute; */
+}
+
+.playlistItems {
+    display: flex;
+}
+
+.pl-modal-layout {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.btn-createpl{
+    cursor: pointer;
+}
+.btn-createpl:hover{
+    color: var(--yellow-color-light);
+}
+
+.plclose-icon {
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.plclose-icon:hover {
+    color: var(--violet-color);
+}
+
+.plform-label {
+    display: block
+}
+
+.playlist-form {
+    padding: 20px;
+}

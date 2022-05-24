@@ -20,17 +20,17 @@ const LoginPage = () => {
       if (!errorData[0]) {
         setIsLoggedIn(data)
         localStorage.setItem("userToken", data)
-        console.log(location?.state?.from?.pathname)
-        console.log(location.state)
         location.state ? navigate(location?.state?.from?.pathname) : navigate('/')
       }
       else {
+        console.log(errorData[1])
         setLoginError(msg)
       }
     } catch (err) {
       setLoginError('Unexpected Error ocurred.')
     }
   }
+
   return (
     <div>
       <Navbar />
