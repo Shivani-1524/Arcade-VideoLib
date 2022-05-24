@@ -7,6 +7,7 @@ const fetchUserHistory = async () => {
     axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.get("/api/user/history")
+        console.log("Hiostory data", res)
         if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data,
@@ -79,7 +80,8 @@ const sendUserHistory = async (clickedVideo) => {
     const encodedToken = localStorage.getItem("userToken")
     axios.defaults.headers.common['authorization'] = encodedToken;
     const { data } = await fetchUserHistory()
-    const foundInHistory = data?.history.some(video => video._id === clickedVideo._id)
+    console.log(data)
+    const foundInHistory = data?.history?.some(video => video._id === clickedVideo._id)
     if (foundInHistory === false) {
         try {
             const res = await axios({

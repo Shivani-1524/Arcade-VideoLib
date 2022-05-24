@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import './singlevideopage.css'
 import { findElementInData, addToWatchlater, deleteFromWatchlater, fetchVideoDetails, sendUserHistory, addLikedVideo, removeLikedVideo } from '../../Utils/index'
-import { usePlaylist, useWatchlater, useLikedVideo } from '../../Context/index'
+import { usePlaylist, useWatchlater, useLikedVideo, useAuth } from '../../Context/index'
 import { PlaylistModal, VideoEmbed } from '../../Components/index'
 
 
 
 const SingleVideoPage = () => {
+    const { isLoggedIn } = useAuth()
     const { videoId } = useParams()
     const { watchlaterState, watchlaterDispatch } = useWatchlater()
     const { likedVideoState, likedVideoDispatch } = useLikedVideo()
@@ -15,7 +16,7 @@ const SingleVideoPage = () => {
     const isLiked = findElementInData(likedVideoState?.likedVideoList, videoId)
     const [toggleWatchlater, setToggleWatchlater] = useState(isWatchLater)
     const [toggleLike, setToggleLike] = useState(isLiked)
-    const { togglePlaylistModal, setTogglePlaylistModal, setSelectedVideo } = usePlaylist()
+    const { setTogglePlaylistModal, setSelectedVideo } = usePlaylist()
     const [videoDetails, setVideoDetails] = useState(false);
     const { videoUrl, channelName, channelImg, title, description, _id } = videoDetails && videoDetails?.video
     const navigate = useNavigate()
@@ -24,8 +25,10 @@ const SingleVideoPage = () => {
         videoId ?
             (async () => {
                 const { data, errorData } = await fetchVideoDetails(videoId)
+                console.log(data)
+                // setVideoDetails(data)
                 if (!errorData[0]) {
-                    await sendUserHistory(data.video)
+                    isLoggedIn && await sendUserHistory(data.video)
                     setVideoDetails(data)
                 } else {
                     console.log(errorData[1])
@@ -58,7 +61,6 @@ const SingleVideoPage = () => {
         videoDetails &&
         <div>
             <VideoEmbed videoUrl={videoUrl} />
-            {togglePlaylistModal && <PlaylistModal />}
             <div className='video-desc'>
                 <div className="spc-bw">
                     <div className='video-header'>
