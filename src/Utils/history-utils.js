@@ -1,6 +1,10 @@
 import axios from 'axios'
 
+
+
 const fetchUserHistory = async () => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.get("/api/user/history")
         if (res.status === 201 || res.status === 200) {
@@ -17,12 +21,14 @@ const fetchUserHistory = async () => {
         console.error(err)
         return {
             data: "",
-            errorData: [true, "Unexpected error ocurred. Please try again Later."]
+            errorData: [true, "Unexpected error ocurred. Please try again Later"]
         }
     }
 }
 
 const deleteHistoryVideo = async (videoId) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.delete(`/api/user/history/${videoId}`)
         if (res.status === 201 || res.status === 200) {
@@ -45,6 +51,8 @@ const deleteHistoryVideo = async (videoId) => {
 }
 
 const clearHistory = async () => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.delete("/api/user/history/all")
         if (res.status === 201 || res.status === 200) {
@@ -68,6 +76,8 @@ const clearHistory = async () => {
 }
 
 const sendUserHistory = async (clickedVideo) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     const { data } = await fetchUserHistory()
     const foundInHistory = data?.history.some(video => video._id === clickedVideo._id)
     if (foundInHistory === false) {

@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const encodedToken = localStorage.getItem("userToken")
-axios.defaults.headers.common['authorization'] = encodedToken;
+
 
 
 //GETS ALL PLAYLISTS
 const fetchUserPlaylists = async () => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.get("/api/user/playlists")
         if (res.status === 200 || res.status === 201) {
@@ -29,6 +30,8 @@ const fetchUserPlaylists = async () => {
 
 //ADDS NEW PLYLIST
 const createPlaylist = async (playlistTitle, playlistDesc) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.post("/api/user/playlists",
             { playlist: { title: playlistTitle, description: playlistDesc } },
@@ -54,6 +57,8 @@ const createPlaylist = async (playlistTitle, playlistDesc) => {
 
 //DELETES PLAYLIST
 const removePlaylist = async (playlistId) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.delete(`/api/user/playlists/${playlistId}`)
         if (res.status === 200 || res.status === 201) {

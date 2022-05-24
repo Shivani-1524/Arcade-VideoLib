@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const encodedToken = localStorage.getItem("userToken")
-axios.defaults.headers.common['authorization'] = encodedToken;
+
 
 
 
 const addToWatchlater = async (clickedVideo) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios({
             method: "POST",
@@ -30,6 +31,8 @@ const addToWatchlater = async (clickedVideo) => {
 }
 
 const fetchWatchlaterVideos = async () => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = axios.get('/api/user/watchlater')
         if (res.status === 201) {
@@ -49,6 +52,8 @@ const fetchWatchlaterVideos = async () => {
 }
 
 const deleteFromWatchlater = async (videoId) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.delete(`/api/user/watchlater/${videoId}`)
         if (res.status === 201 || res.status === 200) {

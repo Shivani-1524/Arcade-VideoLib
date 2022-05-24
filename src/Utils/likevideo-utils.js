@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-const encodedToken = localStorage.getItem("userToken")
-axios.defaults.headers.common['authorization'] = encodedToken;
+
 
 const fetchLikedVideos = async () => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios.get("/api/user/likes")
         if (res.status === 201 || 200) {
@@ -26,6 +27,8 @@ const fetchLikedVideos = async () => {
 }
 
 const addLikedVideo = async (likedVideo) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios({
             method: "POST",
@@ -54,6 +57,8 @@ const addLikedVideo = async (likedVideo) => {
 
 
 const removeLikedVideo = async (dislikedVideoID) => {
+    const encodedToken = localStorage.getItem("userToken")
+    axios.defaults.headers.common['authorization'] = encodedToken;
     try {
         const res = await axios({
             method: "DELETE",
