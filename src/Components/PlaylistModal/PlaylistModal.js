@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { usePlaylist } from '../../Context/playlist-provider'
 import './playlistmodal.css'
 import { addVideoToPlaylist, createPlaylist, fetchUserPlaylists, removeVideoFromPlaylist } from '../../Utils/playlist-utils'
-import { findElementInData } from '../../Utils/common-utils.js'
+// import { findElementInData } from '../../Utils/common-utils.js'
 
 const PlaylistModal = () => {
   useEffect(() => {

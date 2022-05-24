@@ -1,8 +1,5 @@
 import axios from 'axios'
 
-const encodedToken = localStorage.getItem("userToken")
-axios.defaults.headers.common['authorization'] = encodedToken;
-
 const fetchUserHistory = async () => {
     try {
         const res = await axios.get("/api/user/history")

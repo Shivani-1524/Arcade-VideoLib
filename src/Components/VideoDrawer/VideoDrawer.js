@@ -32,9 +32,11 @@ const VideoDrawer = ({ video, onSelect }) => {
     return (
         <div className='flex-col video-drawer'>
             <div className='kebab-item' onClick={() => {
-                setTogglePlaylistModal(true)
-                setSelectedVideo(video)
-                onSelect()
+                if (isLoggedIn) {
+                    setTogglePlaylistModal(true)
+                    setSelectedVideo(video)
+                    onSelect()
+                } else navigate('/login')
             }}>
                 <p> Save To Playlist</p>
             </div>

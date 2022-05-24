@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import './singlevideopage.css'
-import { findElementInData, addToWatchlater, deleteFromWatchlater, fetchVideoDetails, sendUserHistory, addLikedVideo, removeLikedVideo } from '../../Utils/get-singlevideo'
+import { findElementInData, addToWatchlater, deleteFromWatchlater, fetchVideoDetails, sendUserHistory, addLikedVideo, removeLikedVideo } from '../../Utils/index'
 import { usePlaylist, useWatchlater, useLikedVideo } from '../../Context/index'
 import { PlaylistModal, VideoEmbed } from '../../Components/index'
 

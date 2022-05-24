@@ -32,8 +32,6 @@ const VideoCard = ({ props, type, playlistId }) => {
         const { data, errorData } = await deleteFromWatchlater(videoId)
         !errorData[0] ? watchlaterDispatch({ type: 'UPDATE_WATCHLATER', payload: data?.watchlater }) : console.error(errorData[1])
     }
-
-
     const handlePlaylistVideoDelete = async (playlistId, videoId) => {
         const { data, errorData } = await removeVideoFromPlaylist(playlistId, videoId)
         !errorData[0] ? playlistDispatch({ type: 'UPDATE_PLAYLIST_VIDEO', payload: data?.playlist }) : console.error(errorData[1])

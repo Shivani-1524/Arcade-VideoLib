@@ -26,7 +26,7 @@ const HomePage = () => {
 
     return (
         <div>
-            {togglePlaylistModal && <PlaylistModal />}
+            {/* {togglePlaylistModal && <PlaylistModal />} */}
             <div className="hero-section center-items">
                 <h1 className='center-txt'>THE <span className='violet-txt'>VIDEO GAMING </span> ARCHIVE</h1>
             </div>
