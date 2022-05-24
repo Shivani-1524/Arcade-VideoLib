@@ -6,11 +6,12 @@ import { EmptyPage } from '../../Components/EmptyPage/EmptyPage'
 
 const WatchLaterPage = () => {
     const { watchlaterDispatch, watchlaterState } = useWatchlater();
-    const orderedList = watchlaterState?.watchlaterList.reverse()
+    const orderedList = [...watchlaterState?.watchlaterList].reverse();
+
     useEffect(() => {
         (async () => {
             const { data, errorData } = await fetchWatchlaterVideos()
-            !errorData[0] ? watchlaterDispatch({ payload: data.likes, type: 'UPDATE_WATCHLATER' }) : console.error(errorData[1])
+            !errorData[0] ? watchlaterDispatch({ payload: data.watchlater, type: 'UPDATE_WATCHLATER' }) : console.error(errorData[1])
         })()
     }, [watchlaterDispatch]);
 

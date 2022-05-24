@@ -34,8 +34,8 @@ const fetchWatchlaterVideos = async () => {
     const encodedToken = localStorage.getItem("userToken")
     axios.defaults.headers.common['authorization'] = encodedToken;
     try {
-        const res = axios.get('/api/user/watchlater')
-        if (res.status === 201) {
+        const res = await axios.get('/api/user/watchlater')
+        if (res.status === 201 || res.status === 200) {
             return {
                 data: res.data,
                 errorData: [false]

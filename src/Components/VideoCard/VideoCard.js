@@ -15,7 +15,7 @@ const VideoCard = ({ props, type, playlistId }) => {
     const navigate = useNavigate()
     const { likedVideoDispatch, likedVideoState } = useLikedVideo()
     const { playlistDispatch } = usePlaylist()
-    const watchlaterDispatch = useWatchlater()
+    const { watchlaterDispatch } = useWatchlater()
     const isLikedVideo = isLoggedIn && findElementInData(likedVideoState.likedVideoList, _id)
     const [toggleLike, setToggleLike] = useState(isLikedVideo);
 
@@ -29,6 +29,7 @@ const VideoCard = ({ props, type, playlistId }) => {
         !errorData[0] ? likedVideoDispatch({ type: "UPDATE_LIKEDLIST", payload: data?.likes }) : console.error(errorData[1])
     }
     const handleWatchlaterDelete = async (videoId) => {
+        console.log("del watch later");
         const { data, errorData } = await deleteFromWatchlater(videoId)
         !errorData[0] ? watchlaterDispatch({ type: 'UPDATE_WATCHLATER', payload: data?.watchlater }) : console.error(errorData[1])
     }
@@ -65,6 +66,7 @@ const VideoCard = ({ props, type, playlistId }) => {
                 )
             default:
                 return (<button onClick={async () => {
+                    console.log("dewjawjdj")
                     if (isLoggedIn) {
                         setToggleLike(prev => !prev)
                         const { data, errorData } = !toggleLike || !isLikedVideo ? await addLikedVideo(props) : await removeLikedVideo(props._id)
