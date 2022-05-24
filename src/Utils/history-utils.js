@@ -17,7 +17,7 @@ const fetchUserHistory = async () => {
         console.error(err)
         return {
             data: "",
-            errorData: [true, "Unexpected error ocurred. Please try again Later"]
+            errorData: [true, "Unexpected error ocurred. Please try again Later."]
         }
     }
 }
