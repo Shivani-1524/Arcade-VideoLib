@@ -2,18 +2,18 @@
   .video-drawer{
     position: absolute;
     z-index: 1;
-    right: -10rem;
-    bottom: -3rem;
-  font-size: 1.2rem;
-  row-gap: 10px;
-  background-color: var(--primary-color);
-  color: var(--light-grey);
-  font-weight: 600;
-  height: min-content;
-  align-items: flex-start;
-  border-radius: 5px;
-  width: fit-content;
-  padding: 10px;
+    bottom: -3.5rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    row-gap: 10px;
+    background-color: var(--primary-color);
+    color: var(--light-grey);
+    font-weight: 600;
+    height: min-content;
+    align-items: flex-start;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
 }
 
 .kebab-item{
